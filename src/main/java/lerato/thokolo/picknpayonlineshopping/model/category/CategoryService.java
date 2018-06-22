@@ -52,4 +52,26 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     } 
     
+    public Category deleteCategoryByID(int id){
+        
+       Category c = this.getCategory(id);
+       
+       if(c == null){
+       
+           return null;
+       }else {
+       
+           this.categoryRepository.delete(c);
+       }
+       
+       return c;
+    } 
+    
+    public Category addCategory(Category category){
+    
+        this.categoryRepository.save(category);
+        
+        return category;
+    }
+    
 }

@@ -40,6 +40,12 @@ public class CategoryController {
         return "Category added successfully!!";
     }
     
+    @RequestMapping(value = "/add-category", method = RequestMethod.POST)
+    public Category addCategory(@RequestBody Category category){
+        
+        return this.categoryService.addCategory(category);
+    }
+    
     @CrossOrigin(origins = "*", allowedHeaders = "*" )
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public String deleteCategory(@PathVariable int id){
@@ -60,6 +66,12 @@ public class CategoryController {
     public Category getCategory(@PathVariable int id){
         
         return categoryService.getCategory(id);
+    }
+    
+    @RequestMapping(value = "/delete-category/{id}", method = RequestMethod.DELETE)
+    public Category deleteCategoryByID(@PathVariable int id){
+        
+        return this.categoryService.deleteCategoryByID(id);
     }
     
 }
