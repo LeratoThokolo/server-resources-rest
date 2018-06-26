@@ -53,6 +53,13 @@ public class OrderController {
 
         orderService.deleteOrder(id);
     }
+    
+    @RequestMapping(value = "/remove-order/{id}", method = RequestMethod.DELETE)
+    public Order remove(@PathVariable int id) {
+
+       return this.orderService.delete(id);
+    }
+
 
     @RequestMapping(value = "/update-order", method = RequestMethod.PUT)
     public Order updateOrder(@RequestBody Order order) {

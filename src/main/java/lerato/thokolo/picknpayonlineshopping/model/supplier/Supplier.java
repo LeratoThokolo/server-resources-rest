@@ -32,25 +32,32 @@ import lerato.thokolo.picknpayonlineshopping.model.user.User;
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Supplier extends User implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int userID;
     private String fullNames;
-    
+
     @Column(unique = true)
     private String userName;
-    
+
     @Column(unique = true)
     private String email;
     private String cellNo;
     private String password;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date lastPasswordResetDate;
-    
+
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "userID"))
     private Set<Role> roles;
+
+    public Supplier() {
+    }
+
+    public Supplier(User user) {
+        super(user);
+    }
 
     public Supplier(int userID, String fullNames, String userName, String email, String cellNo, String password, Date lastPasswordResetDate, Set<Role> roles) {
         this.userID = userID;
@@ -62,9 +69,9 @@ public class Supplier extends User implements Serializable {
         this.lastPasswordResetDate = lastPasswordResetDate;
         this.roles = roles;
     }
-    
-    public Supplier(String json) throws IOException{
-    
+
+    public Supplier(String json) throws IOException {
+
         Supplier s = new ObjectMapper().readValue(json, Supplier.class);
         this.userID = s.userID;
         this.fullNames = s.fullNames;
@@ -155,14 +162,5 @@ public class Supplier extends User implements Serializable {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    
-    
 
-    public Supplier() {
-    }
-
-    public Supplier(User user) {
-        super(user);
-    }
-   
 }

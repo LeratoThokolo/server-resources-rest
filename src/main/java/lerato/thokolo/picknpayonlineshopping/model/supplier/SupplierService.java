@@ -22,32 +22,63 @@ public class SupplierService {
 
     @Autowired
     private SupplierRepository supplierRepository;
-    
+
     @Autowired
     private RoleRepository roleRepository;
 
     public void addSupplier(Supplier supplier) {
 
-         Role role = roleRepository.getOne(2);
-        
+        Role role = roleRepository.getOne(2);
+
         String roleName = role.getName();
         role.setName(roleName);
-        
-         Set<Role> roles = new HashSet<Role>(){{
-        
-            add(role);
-        }};
-         
-         supplier.setRoles(roles);
-        
-       
+
+        Set<Role> roles = new HashSet<Role>() {
+            {
+
+                add(role);
+            }
+        };
+
+        supplier.setRoles(roles);
+
         this.supplierRepository.save(supplier);
 
+    }
+
+    public Supplier registerSupplier(Supplier supplier) {
+
+        Role role = roleRepository.getOne(2);
+
+        String roleName = role.getName();
+        role.setName(roleName);
+
+        Set<Role> roles = new HashSet<Role>() {
+            {
+
+                add(role);
+            }
+        };
+
+        supplier.setRoles(roles);
+
+        this.supplierRepository.save(supplier);
+
+        return supplier;
     }
 
     public void deleteSupplier(int supplierID) {
 
         supplierRepository.deleteById(supplierID);
+    }
+
+    public Supplier delete(int supplierID) {
+
+       Supplier s = this.supplierRepository.getOne(supplierID);
+       
+       this.supplierRepository.delete(s);
+       
+       return s;
     }
 
     public List<Supplier> allSuppliers() {

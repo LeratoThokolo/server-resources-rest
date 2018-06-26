@@ -36,6 +36,12 @@ public class DriverController {
         return "Driver successfully saved!!";
     }
     
+     @RequestMapping(value = "/add-driver", method = RequestMethod.POST)
+    public Driver addDriver(@RequestBody Driver driver){
+       
+        return this.driverService.addDriver(driver);
+    }
+    
     
     @RequestMapping(value = "/all-drivers", method = RequestMethod.GET)
     public List<Driver> drivers(){
@@ -54,6 +60,13 @@ public class DriverController {
     
         this.driverService.deleteDriver(driverID);
     }
+    
+    @RequestMapping(value = "/remove-driver/{driverID}", method = RequestMethod.DELETE)
+    public Driver delete(@PathVariable int driverID){
+    
+        return this.driverService.delete(driverID);
+    }
+    
     
     @RequestMapping(value = "/update-driver", method = RequestMethod.PUT)
     public Driver updateDriver(@RequestBody Driver driver){

@@ -42,6 +42,16 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
     
+    public Order delete(int id) {
+        
+        Order o = this.getOrder(id);
+        
+        this.orderRepository.deleteById(id);
+        
+        return o;
+    }
+    
+    
     public List<Order> getOrders() {
         
         return this.orderRepository.findAll();

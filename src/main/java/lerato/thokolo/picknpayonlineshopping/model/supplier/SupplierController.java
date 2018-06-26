@@ -31,10 +31,23 @@ public class SupplierController {
         
     }
     
+    @RequestMapping(value = "/register-supplier", method = RequestMethod.POST)
+    public Supplier registerSupplier(@RequestBody Supplier supplier){
+    
+        return this.supplierService.registerSupplier(supplier);
+        
+    }
+    
     @RequestMapping(value = "/delete-supplier/{supplierID}", method = RequestMethod.DELETE)
     public void deleteSupplier(@PathVariable int supplierID){
     
         this.supplierService.deleteSupplier(supplierID);
+    }
+    
+    @RequestMapping(value = "/remove-supplier/{supplierID}", method = RequestMethod.DELETE)
+    public Supplier delete(@PathVariable int supplierID){
+    
+       return this.supplierService.delete(supplierID);
     }
     
     @RequestMapping(value = "/all-suppliers", method = RequestMethod.GET)

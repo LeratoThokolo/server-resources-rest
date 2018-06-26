@@ -19,59 +19,89 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DriverService {
-    
-    
+
     @Autowired
     private DriverRepository driverRepository;
-    
+
     @Autowired
     private RoleRepository roleRepository;
-    
-    
-    public void registerDriver(Driver driver){
-    
+
+    public void registerDriver(Driver driver) {
+
         Role role = roleRepository.getOne(3);
-        
+
         String roleName = role.getName();
         role.setName(roleName);
-        
-         Set<Role> roles = new HashSet<Role>(){{
-        
-            add(role);
-        }};
-         
-         driver.setRoles(roles);
-        
+
+        Set<Role> roles = new HashSet<Role>() {
+            {
+
+                add(role);
+            }
+        };
+
+        driver.setRoles(roles);
+
         driverRepository.save(driver);
-        
+
     }
-    
-    public void deleteDriver(int driverID){
-    
+
+    public Driver addDriver(Driver driver) {
+
+        Role role = roleRepository.getOne(3);
+
+        String roleName = role.getName();
+        role.setName(roleName);
+
+        Set<Role> roles = new HashSet<Role>() {
+            {
+
+                add(role);
+            }
+        };
+
+        driver.setRoles(roles);
+
+        driverRepository.save(driver);
+
+        return driver;
+    }
+
+    public void deleteDriver(int driverID) {
+
         driverRepository.deleteById(driverID);
-        
+
     }
-    
-    public Driver getDriver(int driverID){
-    
+
+    public Driver delete(int userID) {
+
+        Driver d = this.getDriver(userID);
+
+        this.driverRepository.deleteById(userID);
+
+        return d;
+    }
+
+    public Driver getDriver(int driverID) {
+
         return driverRepository.getOne(driverID);
-        
+
     }
-    
-    public Driver updateDriver(Driver driver){
-    
+
+    public Driver updateDriver(Driver driver) {
+
         Driver d = this.getDriver(driver.getUserID());
-        
-        if(d == null){
-        
+
+        if (d == null) {
+
             return null;
         }
-        
+
         return driverRepository.save(driver);
     }
-    
-    public List<Driver> drivers(){
-    
+
+    public List<Driver> drivers() {
+
         return this.driverRepository.findAll();
     }
 }
