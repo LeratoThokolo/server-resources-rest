@@ -5,7 +5,6 @@
  */
 package lerato.thokolo.picknpayonlineshopping.model.sendemail;
 
-import java.io.File;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
