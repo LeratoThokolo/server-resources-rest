@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
+ * Lerato Thokolo
  *
- * @author MANDELACOMP2
  */
 public class Login implements Serializable{
     
